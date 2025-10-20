@@ -1,0 +1,23 @@
+namespace LexiconLookup
+{
+    /// <summary>
+    /// Interface for a lexicon that can find words from a dictionary based on available letters.
+    /// </summary>
+    public interface ILexicon
+    {
+        /// <summary>
+        /// Initializes the lexicon by loading words from a stream.
+        /// </summary>
+        /// <param name="dictionaryStream">Stream containing words separated by line breaks (one word per line).</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        Task InitializeAsync(Stream dictionaryStream);
+
+        /// <summary>
+        /// Finds all words from the dictionary that can be formed using the available letters.
+        /// </summary>
+        /// <param name="letters">The set of available letters with their counts.</param>
+        /// <returns>A read-only list of all valid words that can be formed.</returns>
+        Task<IReadOnlyList<string>> FindWordsAsync(LetterSet letters);
+    }
+}
+
