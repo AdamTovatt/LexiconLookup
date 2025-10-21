@@ -210,8 +210,8 @@ namespace LexiconLookup.Tests
 
         private async Task RunPerformanceTest(int blankTileCount, string testDescription)
         {
-            const int warmupRuns = 1000;
-            const int testRuns = 3000;
+            const int warmupRuns = 3000;
+            const int testRuns = 10000;
 
             // Warmup phase
             _output.WriteLine($"Warming up JIT with {warmupRuns} runs...");
