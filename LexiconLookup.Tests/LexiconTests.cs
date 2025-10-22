@@ -221,6 +221,122 @@ namespace LexiconLookup.Tests
             Assert.Contains("EAT", results);
             Assert.Contains("ART", results);
         }
+
+        [Fact]
+        public async Task ContainsWord_WithValidWord_ReturnsTrue()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD", "TEST");
+
+            // Act
+            bool result = lexicon.ContainsWord("HELLO");
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task ContainsWord_WithInvalidWord_ReturnsFalse()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD", "TEST");
+
+            // Act
+            bool result = lexicon.ContainsWord("GOODBYE");
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public async Task ContainsWord_WithLowercaseWord_ReturnsTrueCaseInsensitive()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD");
+
+            // Act
+            bool result = lexicon.ContainsWord("hello");
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task ContainsWord_WithMixedCaseWord_ReturnsTrueCaseInsensitive()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD");
+
+            // Act
+            bool result = lexicon.ContainsWord("HeLLo");
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task ContainsWord_WithEmptyString_ReturnsFalse()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD");
+
+            // Act
+            bool result = lexicon.ContainsWord("");
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public async Task ContainsWord_WithNullString_ReturnsFalse()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD");
+
+            // Act
+            bool result = lexicon.ContainsWord(null!);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void ContainsWord_BeforeInitialization_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            ILexicon lexicon = new Lexicon();
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => lexicon.ContainsWord("HELLO"));
+        }
+
+        [Fact]
+        public async Task ContainsWord_WithPartialMatch_ReturnsFalse()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD", "TESTING");
+
+            // Act
+            bool resultPrefix = lexicon.ContainsWord("HEL");
+            bool resultSuffix = lexicon.ContainsWord("LLO");
+
+            // Assert
+            Assert.False(resultPrefix);
+            Assert.False(resultSuffix);
+        }
+
+        [Fact]
+        public async Task ContainsWord_WithSingleLetterWord_ReturnsTrue()
+        {
+            // Arrange
+            ILexicon lexicon = await CreateLexiconWithWordsAsync("A", "I", "O");
+
+            // Act
+            bool result = lexicon.ContainsWord("A");
+
+            // Assert
+            Assert.True(result);
+        }
     }
 }
 

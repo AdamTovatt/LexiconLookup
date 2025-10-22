@@ -18,6 +18,13 @@ namespace LexiconLookup
         /// <param name="letters">The set of available letters with their counts.</param>
         /// <returns>A read-only list of all valid words that can be formed.</returns>
         Task<IReadOnlyList<string>> FindWordsAsync(LetterSet letters);
+
+        /// <summary>
+        /// Checks whether a specific word exists in the dictionary.
+        /// </summary>
+        /// <param name="word">The word to check. Case-insensitive.</param>
+        /// <returns>True if the word exists in the dictionary; otherwise, false.</returns>
+        bool ContainsWord(string word);
     }
 }
 

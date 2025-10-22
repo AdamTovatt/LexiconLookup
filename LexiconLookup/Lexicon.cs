@@ -53,6 +53,29 @@ namespace LexiconLookup
             return Task.FromResult<IReadOnlyList<string>>(results);
         }
 
+        /// <inheritdoc/>
+        public bool ContainsWord(string word)
+        {
+            if (!_initialized)
+                throw new InvalidOperationException("Lexicon must be initialized before checking words.");
+            
+            if (string.IsNullOrWhiteSpace(word))
+                return false;
+            
+            string normalizedWord = word.ToUpperInvariant();
+            TrieNode current = _root;
+            
+            foreach (char character in normalizedWord)
+            {
+                if (!current.Children.TryGetValue(character, out TrieNode? childNode))
+                    return false;
+                
+                current = childNode;
+            }
+            
+            return current.IsWordEnd;
+        }
+
         private void InsertWord(string word)
         {
             TrieNode current = _root;
