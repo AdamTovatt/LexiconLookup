@@ -50,4 +50,4 @@ Tested on Intel i9-9900K with a dictionary of **216,353 words**:
 | 1 blank tile | 0.136ms | **7,347** |
 | 2 blank tiles | 0.893ms | **1,120** |
 
-The Trie-based data structure provides excellent performance, with over 70,000 lookups per second for exact letter matches and still over 1,000 lookups per second even with multiple blank tiles.
+The Trie-based data structure provides very fast performance, with over 90,000 lookups per second for exact letter matches and still over 1,000 lookups per second even with multiple blank tiles.
