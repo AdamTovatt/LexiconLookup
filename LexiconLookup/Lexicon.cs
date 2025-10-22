@@ -8,6 +8,9 @@ namespace LexiconLookup
         private TrieNode _root;
         private bool _initialized;
 
+        /// <summary>
+        /// Creates an instance of the <see cref="Lexicon"/> that <see cref="InitializeAsync(Stream)"/> can be called on.
+        /// </summary>
         public Lexicon()
         {
             _root = new TrieNode();

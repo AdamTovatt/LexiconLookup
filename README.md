@@ -1,4 +1,4 @@
-# LexiconLookup
+# <img src="Icons/128w/LexiconLookup.png" alt="LexiconLookup" width="32" height="32"> LexiconLookup
 
 A high-performance C# library for finding words from a dictionary that can be formed using available letters (like Scrabble tiles).
 

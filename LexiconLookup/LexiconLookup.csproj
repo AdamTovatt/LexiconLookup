@@ -4,6 +4,26 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageIcon>LexiconLookup.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/AdamTovatt/LexiconLookup</PackageProjectUrl>
+    <Copyright>MIT</Copyright>
+    <Description>A high-performance C# library for finding words from a dictionary that can be formed using available letters (like Scrabble tiles). </Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/AdamTovatt/LexiconLookup</RepositoryUrl>
+    <PackageTags>word lookup, lookup, lexicon, scrabble, fast lookup</PackageTags>
+    <Authors>Adam Tovatt</Authors>
+    <VersionPrefix>1.0.0</VersionPrefix>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Icons\128w\LexiconLookup.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
