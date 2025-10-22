@@ -37,7 +37,7 @@ namespace LexiconLookup
         }
 
         /// <inheritdoc/>
-        public Task<IReadOnlyList<string>> FindWordsAsync(LetterSet letters)
+        public IReadOnlyList<string> FindWords(LetterSet letters)
         {
             if (!_initialized)
                 throw new InvalidOperationException("Lexicon must be initialized before finding words.");
@@ -50,7 +50,7 @@ namespace LexiconLookup
             
             FindWordsRecursive(_root, availableLetters, availableBlanks, currentWord, 0, results);
             
-            return Task.FromResult<IReadOnlyList<string>>(results);
+            return results;
         }
 
         /// <inheritdoc/>

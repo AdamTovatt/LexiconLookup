@@ -14,12 +14,12 @@ using (FileStream stream = File.OpenRead("dictionary.txt"))
 
 // Find words using available letters
 LetterSet letters = LetterSet.FromString("AETR"); // 1 of each letter
-IReadOnlyList<string> words = await lexicon.FindWordsAsync(letters);
+IReadOnlyList<string> words = lexicon.FindWords(letters);
 // Returns: ["ART", "EAT", "RATE", "TEA", "TAR", "RAT"]
 
 // Support for blank tiles (wildcards)
 LetterSet lettersWithBlanks = LetterSet.FromString("AT?"); // A, T, and one blank
-IReadOnlyList<string> wordsWithBlanks = await lexicon.FindWordsAsync(lettersWithBlanks);
+IReadOnlyList<string> wordsWithBlanks = lexicon.FindWords(lettersWithBlanks);
 // Returns: ["CAT", "BAT", "RAT", "HAT", etc.]
 
 // Check if a specific word exists in the dictionary

@@ -16,14 +16,14 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithSimpleLetters_FindsAllMatchingWords()
+        public async Task FindWords_WithSimpleLetters_FindsAllMatchingWords()
         {
             // Arrange
             ILexicon lexicon = await CreateLexiconWithWordsAsync("TEA", "EAT", "ART", "RATE", "TAR", "RAT");
             LetterSet letters = LetterSet.FromString("AETR");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("TEA", results);
@@ -36,28 +36,28 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithNoMatches_ReturnsEmptyList()
+        public async Task FindWords_WithNoMatches_ReturnsEmptyList()
         {
             // Arrange
             ILexicon lexicon = await CreateLexiconWithWordsAsync("HELLO", "WORLD", "QUIZ");
             LetterSet letters = LetterSet.FromString("AETR");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Empty(results);
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithSubsetOfLetters_FindsMatchingWords()
+        public async Task FindWords_WithSubsetOfLetters_FindsMatchingWords()
         {
             // Arrange
             ILexicon lexicon = await CreateLexiconWithWordsAsync("TEA", "EAT", "ART", "RATE", "TAR", "AE");
             LetterSet letters = LetterSet.FromString("EA");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("AE", results);
@@ -69,14 +69,14 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithDuplicateLetters_RespectsLetterCounts()
+        public async Task FindWords_WithDuplicateLetters_RespectsLetterCounts()
         {
             // Arrange
             ILexicon lexicon = await CreateLexiconWithWordsAsync("APPLE", "APE", "PALE", "LEAP");
             LetterSet letters = LetterSet.FromString("APEL");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("APE", results);
@@ -86,14 +86,14 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithBlankTile_FindsWordsUsingBlankAsWildcard()
+        public async Task FindWords_WithBlankTile_FindsWordsUsingBlankAsWildcard()
         {
             // Arrange
             ILexicon lexicon = await CreateLexiconWithWordsAsync("CAT", "BAT", "RAT", "HAT");
             LetterSet letters = LetterSet.FromString("AT?");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("CAT", results);
@@ -104,14 +104,14 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithMultipleBlanks_UsesAllBlanks()
+        public async Task FindWords_WithMultipleBlanks_UsesAllBlanks()
         {
             // Arrange
             ILexicon lexicon = await CreateLexiconWithWordsAsync("CAT", "CATS", "CAST");
             LetterSet letters = LetterSet.FromString("AT??");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("CAT", results);
@@ -127,7 +127,7 @@ namespace LexiconLookup.Tests
             LetterSet letters = LetterSet.FromString("AETR");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("TEA", results);
@@ -143,7 +143,7 @@ namespace LexiconLookup.Tests
             LetterSet letters = LetterSet.FromString("AETR");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("TEA", results);
@@ -159,7 +159,7 @@ namespace LexiconLookup.Tests
             LetterSet letters = LetterSet.FromString("AETR");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Empty(results);
@@ -173,7 +173,7 @@ namespace LexiconLookup.Tests
             LetterSet letters = LetterSet.FromString("");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Empty(results);
@@ -187,7 +187,7 @@ namespace LexiconLookup.Tests
             LetterSet letters = LetterSet.FromString("A");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Contains("A", results);
@@ -213,7 +213,7 @@ namespace LexiconLookup.Tests
             LetterSet letters = LetterSet.FromString("AETR");
 
             // Act
-            IReadOnlyList<string> results = await lexicon.FindWordsAsync(letters);
+            IReadOnlyList<string> results = lexicon.FindWords(letters);
 
             // Assert
             Assert.Equal(3, results.Count);

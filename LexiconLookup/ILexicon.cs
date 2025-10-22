@@ -17,7 +17,7 @@ namespace LexiconLookup
         /// </summary>
         /// <param name="letters">The set of available letters with their counts.</param>
         /// <returns>A read-only list of all valid words that can be formed.</returns>
-        Task<IReadOnlyList<string>> FindWordsAsync(LetterSet letters);
+        IReadOnlyList<string> FindWords(LetterSet letters);
 
         /// <summary>
         /// Checks whether a specific word exists in the dictionary.

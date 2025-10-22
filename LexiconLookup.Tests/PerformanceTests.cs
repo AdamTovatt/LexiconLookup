@@ -60,7 +60,7 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithLargeDictionary_PerformsWell()
+        public void FindWords_WithLargeDictionary_PerformsWell()
         {
             // Arrange - lexicon is already initialized
 
@@ -74,7 +74,7 @@ namespace LexiconLookup.Tests
 
                 // Act - measure performance
                 Stopwatch stopwatch = Stopwatch.StartNew();
-                IReadOnlyList<string> results = await _lexicon.FindWordsAsync(letterSet);
+                IReadOnlyList<string> results = _lexicon.FindWords(letterSet);
                 stopwatch.Stop();
 
                 // Assert
@@ -101,7 +101,7 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task FindWordsAsync_WithBlankTiles_PerformsWell()
+        public void FindWords_WithBlankTiles_PerformsWell()
         {
             // Arrange - lexicon is already initialized
 
@@ -118,7 +118,7 @@ namespace LexiconLookup.Tests
 
                 // Act
                 Stopwatch stopwatch = Stopwatch.StartNew();
-                IReadOnlyList<string> results = await _lexicon.FindWordsAsync(letterSet);
+                IReadOnlyList<string> results = _lexicon.FindWords(letterSet);
                 stopwatch.Stop();
 
                 // Assert
@@ -191,24 +191,24 @@ namespace LexiconLookup.Tests
         }
 
         [Fact]
-        public async Task PerformanceTest_NoBlankTiles_AverageLookupTime()
+        public void PerformanceTest_NoBlankTiles_AverageLookupTime()
         {
-            await RunPerformanceTest(0, "No blank tiles");
+            RunPerformanceTest(0, "No blank tiles");
         }
 
         [Fact]
-        public async Task PerformanceTest_OneBlankTile_AverageLookupTime()
+        public void PerformanceTest_OneBlankTile_AverageLookupTime()
         {
-            await RunPerformanceTest(1, "One blank tile");
+            RunPerformanceTest(1, "One blank tile");
         }
 
         [Fact]
-        public async Task PerformanceTest_TwoBlankTiles_AverageLookupTime()
+        public void PerformanceTest_TwoBlankTiles_AverageLookupTime()
         {
-            await RunPerformanceTest(2, "Two blank tiles");
+            RunPerformanceTest(2, "Two blank tiles");
         }
 
-        private async Task RunPerformanceTest(int blankTileCount, string testDescription)
+        private void RunPerformanceTest(int blankTileCount, string testDescription)
         {
             const int warmupRuns = 3000;
             const int testRuns = 10000;
@@ -221,7 +221,7 @@ namespace LexiconLookup.Tests
                 string lettersWithBlanks = randomLetters + new string('?', blankTileCount);
                 LetterSet letterSet = LetterSet.FromString(lettersWithBlanks);
                 
-                await _lexicon.FindWordsAsync(letterSet);
+                _lexicon.FindWords(letterSet);
             }
 
             // Performance test phase
@@ -235,7 +235,7 @@ namespace LexiconLookup.Tests
                 LetterSet letterSet = LetterSet.FromString(lettersWithBlanks);
 
                 Stopwatch stopwatch = Stopwatch.StartNew();
-                IReadOnlyList<string> results = await _lexicon.FindWordsAsync(letterSet);
+                IReadOnlyList<string> results = _lexicon.FindWords(letterSet);
                 stopwatch.Stop();
 
                 timings.Add(stopwatch.Elapsed.TotalMilliseconds);
