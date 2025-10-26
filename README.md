@@ -1,6 +1,6 @@
 # <img src="Icons/128w/LexiconLookup.png" alt="LexiconLookup" width="32" height="32"> LexiconLookup
 
-[![NuGet](https://img.shields.io/nuget/v/LexiconLookup.svg)](https://www.nuget.org/packages/LexiconLookup)
+[![Tests](https://github.com/AdamTovatt/lexicon-lookup/actions/workflows/dotnet.yml/badge.svg)](https://github.com/AdamTovatt/lexicon-lookup/actions/workflows/dotnet.yml) [![NuGet](https://img.shields.io/nuget/v/LexiconLookup.svg)](https://www.nuget.org/packages/LexiconLookup)
 
 A high-performance C# library for finding words from a dictionary that can be formed using available letters (like Scrabble tiles).
 
